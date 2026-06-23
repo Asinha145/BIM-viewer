@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import type { Element } from './types';
 
 const API = 'https://bim-api.asinha-371.workers.dev';
 
