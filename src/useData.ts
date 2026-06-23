@@ -61,7 +61,7 @@ export function useMeshes(l1: string, l2: string, l3: string) {
 
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams({ limit: '500' });
+    const params = new URLSearchParams({ limit: '2000' });
     if (l1) params.set('l1', l1);
     if (l2) params.set('l2', l2);
     if (l3) params.set('l3', l3);
