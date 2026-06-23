@@ -29,31 +29,6 @@ export function useOptions(level: '1' | '2' | '3', l1: string, l2: string, l3: s
   return { options, loading };
 }
 
-export function useElements(l1: string, l2: string, l3: string) {
-  const [elements, setElements] = useState<Element[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const params = new URLSearchParams();
-    if (l1) params.set('l1', l1);
-    if (l2) params.set('l2', l2);
-    if (l3) params.set('l3', l3);
-
-    console.log('[useElements]', { l1, l2, l3 });
-    fetch(`${API}/elements?${params}&limit=5000`)
-      .then(r => r.json())
-      .then((data: Element[]) => {
-        console.log(`[useElements] → ${data.length} elements`);
-        setElements(data);
-        setLoading(false);
-      })
-      .catch(e => { console.error('[useElements] error', e); setLoading(false); });
-  }, [l1, l2, l3]);
-
-  return { elements, loading };
-}
-
 // Returns the exact total count for the current filter combination
 export function useCount(l1: string, l2: string, l3: string) {
   const [total, setTotal] = useState<number | null>(null);
@@ -83,7 +58,7 @@ export function useMeshes(l1: string, l2: string, l3: string) {
 
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams({ limit: '2000' });
+    const params = new URLSearchParams({ limit: '5000' });
     if (l1) params.set('l1', l1);
     if (l2) params.set('l2', l2);
     if (l3) params.set('l3', l3);

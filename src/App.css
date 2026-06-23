@@ -69,6 +69,79 @@ body {
 
 .filter-panel select:disabled { opacity: 0.45; cursor: default; }
 
+/* UID search box */
+.uid-search {
+  position: relative;
+}
+
+.uid-search input {
+  background: #0f0f1e;
+  color: #e0e0f0;
+  border: 1px solid #2e2e5e;
+  border-radius: 5px;
+  padding: 6px 28px 6px 8px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.uid-search input:focus {
+  outline: none;
+  border-color: #4a90d9;
+}
+
+.uid-clear {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #7878a0;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.uid-clear:hover { color: #e0e0f0; }
+
+.uid-dropdown {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+  right: 0;
+  background: #16162a;
+  border: 1px solid #2e2e5e;
+  border-radius: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.uid-option {
+  padding: 6px 9px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 1px solid #1e1e36;
+}
+
+.uid-option:last-child { border-bottom: none; }
+.uid-option:hover { background: #1e1e40; }
+
+.uid-id   { font-size: 11px; color: #a0c4ff; font-family: monospace; }
+.uid-name { font-size: 10px; color: #7878a0; }
+
+.uid-more {
+  padding: 6px 9px;
+  font-size: 10px;
+  color: #555;
+  text-align: center;
+  font-style: italic;
+}
+
 .match-count {
   font-size: 11px;
   color: #4a90d9;
