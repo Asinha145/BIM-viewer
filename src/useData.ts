@@ -54,6 +54,28 @@ export function useElements(l1: string, l2: string, l3: string) {
   return { elements, loading };
 }
 
+// Returns the exact total count for the current filter combination
+export function useCount(l1: string, l2: string, l3: string) {
+  const [total, setTotal] = useState<number | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (l1) params.set('l1', l1);
+    if (l2) params.set('l2', l2);
+    if (l3) params.set('l3', l3);
+
+    fetch(`${API}/count?${params}`)
+      .then(r => r.json())
+      .then((data: { total: number }) => {
+        console.log(`[useCount] → ${data.total} total`);
+        setTotal(data.total);
+      })
+      .catch(e => console.error('[useCount] error', e));
+  }, [l1, l2, l3]);
+
+  return total;
+}
+
 // Returns all mesh data URIs for filtered elements (only 303020 has meshes)
 export function useMeshes(l1: string, l2: string, l3: string) {
   const [meshes, setMeshes] = useState<Record<string, string>>({});

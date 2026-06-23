@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useOptions, useElements } from './useData';
+import { useOptions, useElements, useCount } from './useData';
 import type { Element } from './types';
 
 interface Props {
@@ -18,6 +18,7 @@ export function FilterPanel({ l1, setL1, l2, setL2, l3, setL3, uid, setUid, mesh
   const { options: l2Opts, loading: l2Load } = useOptions('2', l1, '', l3);
   const { options: l3Opts, loading: l3Load } = useOptions('3', l1, l2, '');
   const { elements, loading: elLoad } = useElements(l1, l2, l3);
+  const totalCount = useCount(l1, l2, l3);
 
   const selected = useMemo(() => elements.find(e => e.id === uid) ?? null, [elements, uid]);
 
@@ -67,8 +68,11 @@ export function FilterPanel({ l1, setL1, l2, setL2, l3, setL3, uid, setUid, mesh
         </select>
       </label>
 
-      {elements.length > 0 && (
-        <div className="match-count">{elements.length.toLocaleString()} matching elements</div>
+      {totalCount !== null && (
+        <div className="match-count">
+          {totalCount.toLocaleString()} matching elements
+          {elements.length < totalCount && ` · showing ${elements.length.toLocaleString()} in UID list`}
+        </div>
       )}
 
       {selected && (
