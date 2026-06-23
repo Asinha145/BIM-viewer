@@ -151,7 +151,7 @@ export function Viewer3D({ meshes, selectedId, onMeshCountChange }: Props) {
     ctx.controls.target.copy(center);
     ctx.controls.update();
 
-    console.debug(`[Viewer3D] fit: center=${center.toArray().map(v=>v.toFixed(1))}, radius=${radius.toFixed(1)}, preset=${preset}`);
+    console.log(`[Viewer3D] fit: center=${center.toArray().map(v=>v.toFixed(1))}, radius=${radius.toFixed(1)}, preset=${preset}`);
   }, []);
 
   // Load/reload meshes when meshes prop changes
@@ -168,11 +168,11 @@ export function Viewer3D({ meshes, selectedId, onMeshCountChange }: Props) {
     onMeshCountChange?.(entries.length);
 
     if (entries.length === 0) {
-      console.debug('[Viewer3D] no meshes to load');
+      console.log('[Viewer3D] no meshes to load');
       return;
     }
 
-    console.debug(`[Viewer3D] loading ${entries.length} meshes…`);
+    console.log(`[Viewer3D] loading ${entries.length} meshes…`);
     const loader = new GLTFLoader();
     let loaded = 0;
 
@@ -192,12 +192,12 @@ export function Viewer3D({ meshes, selectedId, onMeshCountChange }: Props) {
           loaded++;
           setLoadedCount(loaded);
           if (loaded === entries.length) {
-            console.debug('[Viewer3D] all meshes loaded, fitting camera');
+            console.log('[Viewer3D] all meshes loaded, fitting camera');
             fitCamera(activePreset as CameraPreset);
           }
         })
         .catch(e => {
-          console.warn(`[Viewer3D] failed to load mesh for ${id}:`, e);
+          console.log(`[Viewer3D] failed to load mesh for ${id}:`, e);
           loaded++;
           setLoadedCount(loaded);
         });
@@ -210,7 +210,7 @@ export function Viewer3D({ meshes, selectedId, onMeshCountChange }: Props) {
     const ctx = stateRef.current;
     if (!ctx) return;
     const hasSelection = Boolean(selectedId);
-    console.debug(`[Viewer3D] highlight selectedId=${selectedId || '(none)'}`);
+    console.log(`[Viewer3D] highlight selectedId=${selectedId || '(none)'}`);
     ctx.group.traverse(child => {
       if ((child as THREE.Mesh).isMesh) {
         const m = child as THREE.Mesh;
@@ -236,7 +236,7 @@ export function Viewer3D({ meshes, selectedId, onMeshCountChange }: Props) {
     ctx.orthoCam.position.copy(ctx.perspCam.position);
     ctx.controls.update();
     setIsOrtho(next);
-    console.debug(`[Viewer3D] toggled to ${next ? 'ortho' : 'perspective'}`);
+    console.log(`[Viewer3D] toggled to ${next ? 'ortho' : 'perspective'}`);
   };
 
   // Camera preset buttons

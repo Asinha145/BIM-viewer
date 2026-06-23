@@ -15,11 +15,11 @@ export function useOptions(level: '1' | '2' | '3', l1: string, l2: string, l3: s
     if (l2) params.set('l2', l2);
     if (l3) params.set('l3', l3);
 
-    console.debug(`[useOptions] level=${level}`, { l1, l2, l3 });
+    console.log(`[useOptions] level=${level}`, { l1, l2, l3 });
     fetch(`${API}/options?${params}`)
       .then(r => r.json())
       .then((data: string[]) => {
-        console.debug(`[useOptions] level=${level} → ${data.length} options`);
+        console.log(`[useOptions] level=${level} → ${data.length} options`);
         setOptions(data);
         setLoading(false);
       })
@@ -40,11 +40,11 @@ export function useElements(l1: string, l2: string, l3: string) {
     if (l2) params.set('l2', l2);
     if (l3) params.set('l3', l3);
 
-    console.debug('[useElements]', { l1, l2, l3 });
+    console.log('[useElements]', { l1, l2, l3 });
     fetch(`${API}/elements?${params}&limit=5000`)
       .then(r => r.json())
       .then((data: Element[]) => {
-        console.debug(`[useElements] → ${data.length} elements`);
+        console.log(`[useElements] → ${data.length} elements`);
         setElements(data);
         setLoading(false);
       })
@@ -66,11 +66,11 @@ export function useMeshes(l1: string, l2: string, l3: string) {
     if (l2) params.set('l2', l2);
     if (l3) params.set('l3', l3);
 
-    console.debug('[useMeshes] fetching', { l1, l2, l3 });
+    console.log('[useMeshes] fetching', { l1, l2, l3 });
     fetch(`${API}/meshes?${params}`)
       .then(r => r.json())
       .then((data: Record<string, string>) => {
-        console.debug(`[useMeshes] → ${Object.keys(data).length} meshes`);
+        console.log(`[useMeshes] → ${Object.keys(data).length} meshes`);
         setMeshes(data);
         setLoading(false);
       })
