@@ -10,4 +10,3 @@ export interface Element {
   src: string;
 }
 
-export type MeshMap = Record<string, string>; // GlobalId -> data URI
